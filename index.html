@@ -6,87 +6,18 @@
     <title>Riyu Exambro</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        body { 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            height: 100vh; 
-            background-color: #ffffff; 
-        }
-        
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px 20px; 
-            background-color: #fff; 
-            /* Garis tipis sudah dihapus */
-        }
-        
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; height: 100vh; background-color: #ffffff; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: #fff; }
         .header h1 { margin: 0; font-size: 22px; font-weight: 500; color: #333; }
         .header-icons { display: flex; gap: 15px; color: #000; cursor: pointer; }
-        
-        .main-content { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 0 25px; 
-        }
-        
-        .input-url { 
-            width: 100%; 
-            max-width: 400px; 
-            padding: 15px; 
-            font-size: 16px; 
-            border: 1px solid #999; 
-            border-radius: 5px; 
-            margin-bottom: 25px; 
-            box-sizing: border-box; 
-            outline: none; 
-        }
-        
-        .btn { 
-            width: 100%; 
-            max-width: 400px; 
-            padding: 14px; 
-            font-size: 15px; 
-            font-weight: bold; 
-            color: white; 
-            background-color: #1976D2; 
-            border: none; 
-            border-radius: 25px; 
-            cursor: pointer; 
-            margin-bottom: 15px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 10px; 
-            text-transform: uppercase; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-        }
-        
-        .btn-hapus { background-color: #d32f2f; }
-        .btn:active { transform: scale(0.98); }
-        
+        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 25px; }
+        .input-url { width: 100%; max-width: 400px; padding: 15px; font-size: 16px; border: 1px solid #999; border-radius: 5px; margin-bottom: 25px; box-sizing: border-box; outline: none; }
+        .btn { width: 100%; max-width: 400px; padding: 14px; font-size: 15px; font-weight: bold; color: white; background-color: #1976D2; border: none; border-radius: 25px; cursor: pointer; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn:active { background-color: #1565C0; transform: scale(0.98); }
+        .btn .material-icons { font-size: 20px; }
+
         /* Modal Styles */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: white; 
-            z-index: 1000; 
-            padding: 20px; 
-            box-sizing: border-box; 
-            overflow-y: auto; 
-        }
-        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 1000; padding: 20px; box-sizing: border-box; overflow-y: auto; }
         #infoModal { background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; }
         .modal-content { background: white; padding: 20px; border-radius: 15px; width: 85%; max-width: 300px; }
         .history-item { padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
@@ -97,7 +28,7 @@
     <div class="header">
         <h1>Riyu Exambro</h1>
         <div class="header-icons">
-            <span class="material-icons" onclick="document.getElementById('qrModal').style.display='block'">grid_view</span> 
+            <span class="material-icons">grid_view</span> 
             <span class="material-icons" onclick="showHistory()">history</span> 
             <span class="material-icons" onclick="showInfo()">info_outline</span> 
         </div>
@@ -109,23 +40,10 @@
         <button class="btn"><span class="material-icons">qr_code_scanner</span> SCAN QR-CODE</button>
     </div>
 
-    <div id="qrModal" class="modal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-            <h3>Buat QR</h3>
-            <span class="material-icons" onclick="closeModal('qrModal')" style="cursor:pointer;">close</span>
-        </div>
-        <p style="font-size: 14px; color: #555;">Buat QR khusus yang hanya dapat dibaca oleh aplikasi Riyu Exambro.</p>
-        <input type="text" id="urlQR" class="input-url" placeholder="Masukkan URL" style="width: 100%; margin-bottom: 20px;">
-        <div style="display: flex; gap: 10px;">
-            <button class="btn btn-hapus" onclick="closeModal('qrModal')">Hapus</button>
-            <button class="btn" onclick="generateQR()">Buat</button>
-        </div>
-    </div>
-
     <div id="historyModal" class="modal">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h3>Riwayat</h3>
-            <span class="material-icons" onclick="closeModal('historyModal')" style="cursor:pointer;">close</span>
+            <span class="material-icons" onclick="closeModal('historyModal')">close</span>
         </div>
         <div id="historyList"></div>
     </div>
@@ -134,7 +52,7 @@
         <div class="modal-content">
             <h3>Info</h3>
             <p>Hi, terima kasih sudah menggunakan aplikasi ini.</p>
-            <button onclick="closeModal('infoModal')" style="border:none; background:none; color:#1976D2; font-weight:bold; float:right; cursor:pointer;">Tutup</button>
+            <button onclick="closeModal('infoModal')" style="border:none; background:none; color:#1976D2; font-weight:bold; float:right;">Tutup</button>
         </div>
     </div>
 
@@ -143,19 +61,14 @@
             let url = document.getElementById("urlInput").value;
             if (url.trim() !== "") {
                 if (!url.startsWith("http://") && !url.startsWith("https://")) { url = "https://" + url; }
+                
+                // Simpan ke LocalStorage
                 let history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
                 history.unshift(url); 
                 localStorage.setItem("searchHistory", JSON.stringify(history.slice(0, 10)));
+                
                 window.location.href = url;
             } else { alert("Silakan masukkan URL terlebih dahulu!"); }
-        }
-
-        function generateQR() {
-            let url = document.getElementById("urlQR").value;
-            if (url.trim() !== "") {
-                alert("QR berhasil dibuat untuk: " + url);
-                closeModal('qrModal');
-            } else { alert("Silakan masukkan URL!"); }
         }
 
         function showHistory() {
